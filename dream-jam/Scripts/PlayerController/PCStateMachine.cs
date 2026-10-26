@@ -31,7 +31,7 @@ public partial class PCStateMachine : CharacterBody3D
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		if (IsOnFloor())
+		if (TouchingFloor())
 		{
 			CalibrateGravityVector();
 		}
@@ -49,16 +49,18 @@ public partial class PCStateMachine : CharacterBody3D
 		if (floorRay.IsColliding())
 		{
 			//currentGravityVector = -floorRay.GetCollisionNormal();
-			currentGravityVector = -GetFloorNormal();
-		//GD.Print(Mathf.RadToDeg(GetFloorAngle()));
+			var rawGravityDir = -floorRay.GetCollisionNormal();
+			currentGravityVector = new Vector3(Mathf.Pow(rawGravityDir.X, 2)*Mathf.Sign(rawGravityDir.X), Mathf.Pow(rawGravityDir.Y, 2) * Mathf.Sign(rawGravityDir.Y), Mathf.Pow(rawGravityDir.Z, 2) * Mathf.Sign(rawGravityDir.Z));
+			//currentGravityVector = new Vector3(Mathf.Pow(rawGravityDir.X, 3), Mathf.Pow(rawGravityDir.Y, 3), Mathf.Pow(rawGravityDir.Z, 3));
+			UpDirection = -currentGravityVector;
 		}
 	}
 
-	public bool TouchingFloor() // Use this in place of cb.IsOnFloor
+	public bool TouchingFloor() // Use this in place of cb.TouchingFloor
 	{
 		return floorRay.IsColliding();
 	}
-
+	
 	public override void _Input(InputEvent @event) {
 		var newState = currentState.ManageInput(@event);
 		if (newState != null) {

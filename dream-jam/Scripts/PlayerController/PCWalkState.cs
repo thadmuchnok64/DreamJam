@@ -26,17 +26,16 @@ public partial class PCWalkState : PCState
 	}
 	public override PCState PhysicsProcess(double delta) {
 		base._PhysicsProcess(delta);
-		if (pc.TouchingFloor()){
-			//GD.Print(-(pc.currentGravityVector).Cross(Basis.Y));//.LookAt(GlobalPosition - pc.currentGravityVector);
-			var cros = -(pc.currentGravityVector).Cross(Basis.Y);
-			pc.Rotation= new Vector3(0,0,-cros.Z*MathF.PI/2f);
-			//GD.Print(cros);
-			GD.Print(pc.RotationDegrees);
-			//pc.RotateX(-2f / Mathf.Pi);
+		if (pc.IsOnFloor()){
+			OrientAgainstGravity();
+
+
 		}
 		if (pc.Velocity.Y < 0.2f && !pc.IsOnFloor()) {
 			return fallState;
 		}
+		//GD.Print(pc.Velocity);
+
 		//movement
 		Vector2 movement = new Vector2(Input.GetAxis("MoveLeft","MoveRight"), Input.GetAxis("MoveUp","MoveDown"));
 		if (movement.Length() > .1f) {
@@ -46,6 +45,7 @@ public partial class PCWalkState : PCState
 			return idleState;
 			//_SlowGroundMovement(delta);
 		}
+
 		//Gravity
 		_ApplyGravity(delta);
 
@@ -58,7 +58,7 @@ public partial class PCWalkState : PCState
 			//pc.LookAt(pc.Position - hVel.Normalized() * 5, Vector3.Up);
 			//pc.Rotation = new Vector3(0, pc.Rotation.Y, 0);
 		}
-		if (pc.TouchingFloor()) {
+		if (pc.IsOnFloor()) {
 			//if(Input.GetActionStrength("Sprint") > .1) {
 			//	return sprintState;
 			//}

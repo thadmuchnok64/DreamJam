@@ -5,8 +5,6 @@ public partial class PCFallState : PCState {
 	[Export] PCState idleState;
 	[Export] PCState moveState;
 	[Export] AudioStream landSfx;
-	[Export] PCState rollState;
-	[Export] PCState ledgeState;
 	//[Export] LedgeDetector ledgeDetector;
 
 	public override PCState PhysicsProcess(double delta) {

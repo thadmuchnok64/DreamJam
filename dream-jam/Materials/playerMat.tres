@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b63r710vxrs2j"]
+
+[sub_resource type="Gradient" id="Gradient_pxrpk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tdudd"]
+gradient = SubResource("Gradient_pxrpk")
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.05464956, 0.34167716, 0.18523866, 1)
+albedo_texture = SubResource("GradientTexture1D_tdudd")
