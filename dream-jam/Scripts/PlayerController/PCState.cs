@@ -52,25 +52,27 @@ public partial class PCState : Node3D
 
 	// Expected to be called every frame
 	public virtual void _ApplyGravity(double delta) { 
-		var grav = pc.currentGravityVector*defaultGravity;
+		var grav = -pc.GlobalBasis.Y*defaultGravity;
 		pc.Velocity += grav;
-		//GD.Print(grav);
 	}
 
 	public virtual void _Move(Vector2 forw,float moveSpeed, double delta) {
 		var force = forw.Normalized() * moveSpeed;
-		var addedForce = new Vector3(force.X, 0, force.Y);
-		addedForce = addedForce.Rotated(new Vector3(0, 1, 0), pc.camPoint.GlobalRotation.Y);
-		var dot = addedForce.Normalized().Dot((pc.Velocity*new Vector3(1,0,1)).Normalized());
-		if (dot > 0) {
-			var lerpVel = (pc.Velocity*new Vector3(1,0,1)).Lerp(addedForce, (float)delta*40*dot);
-			pc.Velocity = (new Vector3(lerpVel.X, pc.Velocity.Y, lerpVel.Z));
-        }
-        else
-		{
-			pc.Velocity = (new Vector3(addedForce.X, pc.Velocity.Y, addedForce.Z));
+		var addedForce = pc.GlobalBasis.X * force.X + pc.GlobalBasis.Z * force.Y;// new Vector3(force.X, 0, force.Y);
+																				 //addedForce = addedForce.Rotated(new Vector3(0, 1, 0), pc.camPoint.GlobalRotation.Y);
+	//	var dot = addedForce.Normalized().Dot((pc.Velocity).Normalized());
+		//if (dot > 0) {
+		//	var lerpVel = (pc.Velocity).Lerp(addedForce, (float)delta*40);
+		//	pc.Velocity = (new Vector3(lerpVel.X, lerpVel.Y, lerpVel.Z));
 
-		}
+		//}
+		//if (true) { }
+		//else
+		//{
+			pc.Velocity = (new Vector3(addedForce.X, addedForce.Y, addedForce.Z));
+
+		//}
+
 		//anim.Run();
 		//storedHForc 
 	}
@@ -85,5 +87,21 @@ public partial class PCState : Node3D
 		pc.aud = _aud;
 	}
 
+
+	public void OrientAgainstGravity()
+	{
+		var cros = -(pc.currentGravityVector).Cross(Basis.Y);
+		var upward = -Mathf.Sign(pc.currentGravityVector.Y);
+		if (upward >= 0)
+		{
+			pc.Rotation = new Vector3(-cros.X * MathF.PI / 2f, 0, -cros.Z * MathF.PI / 2f);
+		}
+		else
+		{
+			pc.Rotation = new Vector3(-cros.X * MathF.PI / 2f, 0, Mathf.Pi +cros.Z * MathF.PI / 2f);
+
+		}
+		GD.Print(cros);
+	}
 
 }

@@ -35,9 +35,7 @@ public partial class PCIdleState : PCState
 		_ApplyGravity(delta);
 		pc.MoveAndSlide();
 		if (pc.IsOnFloor()) {
-			var cros = -(pc.currentGravityVector).Cross(Basis.Y);
-			pc.Rotation = new Vector3(0, 0, -cros.Z * MathF.PI / 2f);
-			//GD.Print(pc.Rotation);
+			OrientAgainstGravity();
 			return null;
 		}
 		else {

@@ -67,7 +67,6 @@ public partial class PCJumpState : PCState
 
 		pc.MoveAndSlide();
 
-
 		if (pc.IsOnFloor()) {
 
 			pc.aud.Stream = landSfx;
