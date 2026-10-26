@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamJam", "DreamJam.csproj", "{C5ECAE9F-08D9-4E1B-BE0A-9FF9AC2EC694}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5ECAE9F-08D9-4E1B-BE0A-9FF9AC2EC694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5ECAE9F-08D9-4E1B-BE0A-9FF9AC2EC694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5ECAE9F-08D9-4E1B-BE0A-9FF9AC2EC694}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{C5ECAE9F-08D9-4E1B-BE0A-9FF9AC2EC694}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{C5ECAE9F-08D9-4E1B-BE0A-9FF9AC2EC694}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{C5ECAE9F-08D9-4E1B-BE0A-9FF9AC2EC694}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
