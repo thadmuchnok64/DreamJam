@@ -1,7 +1,3 @@
-res://Scripts/Managers/CamManager.cs
-res://Scripts/PlayerController/PCFallState.cs
-res://Scripts/PlayerController/PCJumpState.cs
-res://Scripts/PlayerController/PCWalkState.cs
-res://Scripts/PlayerController/PCIdleState.cs
-res://Scripts/PlayerController/PCStateMachine.cs
-res://Scripts/PlayerController/PCState.cs
+res://Levels/root.tscn
+res://Materials/playerMat.tres
+res://Materials/levelmat.tres

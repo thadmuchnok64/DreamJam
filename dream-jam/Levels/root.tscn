@@ -24,6 +24,10 @@ size = Vector3(6.33, 1, 30.42)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fqjie"]
 data = PackedVector3Array(-3.165, 0.5, 15.21, 3.165, 0.5, 15.21, -3.165, -0.5, 15.21, 3.165, 0.5, 15.21, 3.165, -0.5, 15.21, -3.165, -0.5, 15.21, 3.165, 0.5, -15.21, -3.165, 0.5, -15.21, 3.165, -0.5, -15.21, -3.165, 0.5, -15.21, -3.165, -0.5, -15.21, 3.165, -0.5, -15.21, 3.165, 0.5, 15.21, 3.165, 0.5, -15.21, 3.165, -0.5, 15.21, 3.165, 0.5, -15.21, 3.165, -0.5, -15.21, 3.165, -0.5, 15.21, -3.165, 0.5, -15.21, -3.165, 0.5, 15.21, -3.165, -0.5, -15.21, -3.165, 0.5, 15.21, -3.165, -0.5, 15.21, -3.165, -0.5, -15.21, 3.165, 0.5, 15.21, -3.165, 0.5, 15.21, 3.165, 0.5, -15.21, -3.165, 0.5, 15.21, -3.165, 0.5, -15.21, 3.165, 0.5, -15.21, -3.165, -0.5, 15.21, 3.165, -0.5, 15.21, -3.165, -0.5, -15.21, 3.165, -0.5, 15.21, 3.165, -0.5, -15.21, -3.165, -0.5, -15.21)
 
+[sub_resource type="Curve" id="Curve_vc72m"]
+_data = [Vector2(0, 0.04494381), 0.0, 0.0, 0, 0, Vector2(1, 0.9101124), 0.6011235, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Environment" id="Environment_vupgg"]
 background_mode = 1
 background_color = Color(0.8039822, 0.290376, 0.27993864, 1)
@@ -189,8 +193,9 @@ landSfx = ExtResource("6_pwm0d")
 [node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D" unique_id=1712356088]
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="Marker3D" type="Marker3D" parent="CharacterBody3D" unique_id=539807816]
-transform = Transform3D(1, 0, 0, 0, 0.90539104, 0.42457873, 0, -0.42457873, 0.90539104, 0, 3.4003763, 3.3339477)
+[node name="CamTrackPoint" type="Marker3D" parent="CharacterBody3D" unique_id=539807816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0400424, 0)
+gizmo_extents = 0.5
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CharacterBody3D" unique_id=900385312]
 max_distance = 35.0
@@ -226,10 +231,13 @@ shape = SubResource("ConcavePolygonShape3D_fqjie")
 [node name="CamManager" type="Node3D" parent="." unique_id=1217208618 node_paths=PackedStringArray("trackingObj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2080641, 2.269597, 7.3740764)
 script = ExtResource("8_pwm0d")
-trackingObj = NodePath("../CharacterBody3D")
+trackingObj = NodePath("../CharacterBody3D/CamTrackPoint")
+lerpCurve = SubResource("Curve_vc72m")
+minDis = 5.0
+maxDis = 300.0
 
 [node name="Offset" type="Marker3D" parent="CamManager" unique_id=818462648]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.003637e-08, 2.8418531, 6.4746723)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 6.475)
 
 [node name="Camera3D" type="Camera3D" parent="CamManager/Offset" unique_id=1276401544]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -0.52905655, 1.4505615)
@@ -283,7 +291,7 @@ mesh = SubResource("ArrayMesh_ud4xp")
 shape = SubResource("ConcavePolygonShape3D_pwm0d")
 
 [node name="loop" type="MeshInstance3D" parent="." unique_id=1430324737]
-transform = Transform3D(-100, 8.742277e-06, 1.8189894e-12, 1.8189894e-12, 1.1920928e-05, 99.99999, 8.742278e-06, 99.99999, -1.1920928e-05, 10.400377, 10.686968, -5.622322)
+transform = Transform3D(-100, 8.742277e-06, 1.8189894e-12, 1.8189894e-12, 1.1920928e-05, 99.99999, 8.742278e-06, 99.99999, -1.1920928e-05, 8.280358, 9.537738, -4.1513214)
 material_override = ExtResource("8_fqjie")
 mesh = SubResource("ArrayMesh_52rk2")
 
@@ -292,8 +300,28 @@ mesh = SubResource("ArrayMesh_52rk2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="loop/StaticBody3D" unique_id=1001207994]
 shape = SubResource("ConcavePolygonShape3D_vc72m")
 
+[node name="loop3" type="MeshInstance3D" parent="." unique_id=132421346]
+transform = Transform3D(-100, 8.742277e-06, 1.8189894e-12, 1.8189894e-12, 1.1920928e-05, 99.99999, 8.742278e-06, 99.99999, -1.1920928e-05, 8.280358, 9.537738, -8.309301)
+material_override = ExtResource("8_fqjie")
+mesh = SubResource("ArrayMesh_52rk2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="loop3" unique_id=998860063]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="loop3/StaticBody3D" unique_id=700112337]
+shape = SubResource("ConcavePolygonShape3D_vc72m")
+
+[node name="loop4" type="MeshInstance3D" parent="." unique_id=492073373]
+transform = Transform3D(-100, 8.742277e-06, 1.8189894e-12, 1.8189894e-12, 1.1920928e-05, 99.99999, 8.742278e-06, 99.99999, -1.1920928e-05, 8.280358, 9.537738, -12.447763)
+material_override = ExtResource("8_fqjie")
+mesh = SubResource("ArrayMesh_52rk2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="loop4" unique_id=1016524989]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="loop4/StaticBody3D" unique_id=498873651]
+shape = SubResource("ConcavePolygonShape3D_vc72m")
+
 [node name="loop2" type="MeshInstance3D" parent="." unique_id=278413278]
-transform = Transform3D(-100, 8.742277e-06, 1.8189894e-12, 1.8189894e-12, 1.1920928e-05, 99.99999, 8.742278e-06, 99.99999, -1.1920928e-05, 25.67741, 10.686969, 1.5060906)
+transform = Transform3D(-100, 8.742277e-06, 1.8189894e-12, 1.8189894e-12, 1.1920928e-05, 99.99999, 8.742278e-06, 99.99999, -1.1920928e-05, 21.119633, 7.5849924, 0.10688329)
 material_override = ExtResource("8_fqjie")
 mesh = SubResource("ArrayMesh_52rk2")
 

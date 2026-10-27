@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DreamJam")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0ebcaaae4c0022b048320764d546ce93bee9118")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+094f73281fbe6533a1325b902db374010b9e0db7")]
 [assembly: System.Reflection.AssemblyProductAttribute("DreamJam")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DreamJam")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
